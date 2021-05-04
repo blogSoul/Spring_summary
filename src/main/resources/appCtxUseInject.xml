@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 		http://www.springframework.org/schema/beans/spring-beans.xsd 
+ 		http://www.springframework.org/schema/context 
+ 		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<!-- <bean id="wordDao" class="com.lec09.dao.WordDao" /> -->
+	<bean id="wordDao1" class="com.lec09.dao.WordDao" />
+	<bean id="wordDao2" class="com.lec09.dao.WordDao" />
+	
+	<bean id="registerService" class="com.lec09.service.WordRegisterServiceUseInject" />
+	
+	<bean id="searchService" class="com.lec09.service.WordSearchServiceUseInject" />
+	
+</beans>
