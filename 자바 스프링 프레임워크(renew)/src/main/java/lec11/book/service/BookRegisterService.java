@@ -2,8 +2,6 @@ package lec11.book.service;
 
 import lec11.book.Book;
 import lec11.book.dao.BookDao;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BookRegisterService{

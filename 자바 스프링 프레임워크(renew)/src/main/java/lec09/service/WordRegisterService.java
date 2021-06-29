@@ -3,7 +3,6 @@ package lec09.service;
 import lec09.WordSet;
 import lec09.dao.WordDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class WordRegisterService {
 
