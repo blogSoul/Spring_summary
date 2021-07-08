@@ -54,7 +54,7 @@ null이 있을 가능성이 있으면 `Optional.ofNullable()` 을 사용합니�
 
 실무에선 List를 많이 사용합니다. 
 
-alt + Enter로 해당 함수의 상태 멫 필요 기능을 불 수 있다.
+alt + Enter로 해당 함수의 상태 및 필요 기능을 불 수 있다.
 
 shift + F6로 해당 변수를 사용하는 모든 이름을 전체 지정할 수 있습니다.
 
@@ -96,3 +96,52 @@ memberService 안에 memberRepository를 넣었으므로 DI(Dependency Injection
 3. 다음 화면 오른쪽에 있는 검색창에 단축키 이름을 입력한다. 단축키 이름은 위 그림 처럼 영상 하단에 나온다.
 
 4. 다음 그림을 보면 Refactor This의 윈도우 단축키는 Ctrl + Alt + Shift + T 인 것을 알 수 있다.
+
+controller가 MemberService를 의존하고 있게 만들어줘야 합니다.
+
+@Autowired 는 spring Container에 등록되는 Controller에 해당되는 Service를 넣어줍니다.
+
+스프링 빈을 등록하는 2가지 방법
+
+1. 컴포넌트 스캔과 자동 의존관계 설정 (Component Scan)
+
+2. 자바 코드로 직접 스프링 빈 등록하기
+
+Bean을 등록하는 기준은 `@SpringBootApplication` 을 실행하는 package를 기준으로 합니다.
+
+스프링은 스프링 컨테이너에 스프링 빈을 등록할 때, 기본적으로 싱글톤으로 등록합니다.(유일하게 하나만 등록해서 공유합나다.)
+
+DI에서 필드 주입을 하면 변경할 때, 바꾸기 힘듭니다. 
+
+DI에서 setter 주입하면 public으로 노출이 되서 호출하지 않아도 되는 setter를 계속 호출해야 합니다.
+
+XML로 설정하는 방식도 있지만 최근에는 잘 사용하지 않으므로 생략한다.
+
+DI에는 필드 주입, setter 주입, 생성자 주입 이렇게 3가지 방법이 있다. 의존관계가 실행중에
+동적으로 변하는 경우는 거의 없으므로 생성자 주입을 권장한다.
+
+실무에서는 주로 정형화된 컨트롤러, 서비스, 리포지토리 같은 코드는 컴포넌트 스캔을 사용한다.
+그리고 정형화 되지 않거나, <strong>상황에 따라 구현 클래스를 변경해야 하면 설정을 통해 스프링 빈으로
+등록한다.</strong>
+
+@Autowired 를 통한 DI는 helloConroller , memberService 등과 같이 스프링이 관리하는
+객체에서만 동작한다. 스프링 빈으로 등록하지 않고 내가 직접 생성한 객체에서는 동작하지 않는다.
+
+컨트롤러가 정적 파일보다 우선순위가 높다.
+
+Ex) home.html > index.html
+
+파일 형식 인식이 되지 않는 경우, File > File Properties > Associate with File Type... 선택
+
+POST는 데이터를 전달할 때 많이 사용하고, GET은 데이터를 조회할 때 많이 사용합니다.
+
+`<input name="~~">`을 통해 값을 넣어주게 됩니다.
+
+이전 파일을 보고 싶으면 ctrl + E을 사용하면 됩니다.
+
+## DB 연결
+
+` by default as identity` 은 null일 때, 자동으로 해당 값을 채워줍니다.
+
+insert문 예시 : `insert into member(name) values('spring2')`
+
