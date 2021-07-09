@@ -145,3 +145,88 @@ POST는 데이터를 전달할 때 많이 사용하고, GET은 데이터를 조�
 
 insert문 예시 : `insert into member(name) values('spring2')`
 
+DataSourceUtils를 통해서 getConnection를 하는 것이 좋습니다.
+
+DataSource는 데이터베이스 커넥션을 획득할 때 사용하는 객체다. 
+
+스프링 부트는 데이터베이스 커넥션 정보를 바탕으로 DataSource를 생성하고 스프링 빈으로 만들어둔다. 그래서 DI를 받을 수 있다.
+
+id값이 계속 오르고 띄워서 올라가는건 정상입니다.
+
+김영한 강사님 답변 : 
+
+H2 데이터베이스의 특징이고, 정상입니다^^  
+삭제했다고 과거 id가 되어버리면, 마치 과거 id에 덮어지는 것 처럼 될 수 있으니까요.
+
+spring이 좋은 이유 : 다형성을 이용할 수 있습니다. (Spring container를 이용해서)
+
+solid 검색해보기! 그 중 하나
+
+개방-폐쇄 원칙(OCP, Open-Closed Principle) 확장에는 열려있고, 수정, 변경에는 닫혀있다.
+
+스프링의 DI (Dependencies Injection)을 사용하면 기존 코드를 전혀 손대지 않고, 설정만으로 구현 클래스를 변경할 수 있다
+
+database에는 기본적으로 transaction이 존재합니다.
+
+database는 commit하기 전까지 반영되지 않습니다.
+
+자동으로 commit을 하는지(=auto commit) 안 하는지에 따라 달라집니다.
+
+`@Transactional`를 붙이면 먼저 transaction을 하고 테스트 후 롤백이 이루어집니다.
+
+@SpringBootTest : 스프링 컨테이너와 테스트를 함께 실행한다.
+
+@Transactional : 테스트 케이스에 이 애노테이션이 있으면, 테스트 시작 전에 트랜잭션을 시작하고, 테스트 완료 후에 항상 롤백한다. 
+
+이렇게 하면 DB에 데이터가 남지 않으므로 다음 테스트에 영향을 주지 않는다.  
+
+단위 테스트로 하는게 제일 좋은 테스트입니다.
+
+container를 올리는 테스트는 잘못된 설계일 수 있습니다.
+
+클래스에서 생성자가 하나인 셩우, @Autowired를 생략할 수 있습니다.
+
+실무에서 잘 짜도 테스트에서 보면 엄청 걸리는거 많습니다.
+
+테스트는 진짜 중요합니다!!!
+
+테스트 코드 작성 : 기능 구현 = 7 : 3 으로? 
+
+`spring.jpa.show-sql=true` : jpa에서 날리는 sql을 볼 수 있습니다.
+
+`spring.jpa.hibernate.ddl-auto=none` : 객체를 보고 자동으로 테이블을 만들어주는 변수인데 필요 없으므로 none
+
+jpa는 orm의 기술 중 하나입니다.
+
+`@GeneratedValue(strategy = GenerationType.IDENTITY)` 는
+
+GenerationType.IDENTITY라는 전략을 이용한다는 의미인데, Id를 자동으로 설정해주는 방식을 의미합니다.
+
+파일 새로 만들기는 alt + insert
+
+inline하는 단축키 ctrl + T
+
+## AOP
+
+aop를 쓰는 이유 ?
+
+모든 메소드의 호출 시간을 측정하고 싶다면?
+
+시간을 측정하는 로직은 공통 관심 사항이다
+
+공통 관심 사항(cross-cutting concern) vs 핵심 관심 사항(core concern) 분리
+
+SpringConfig에 @Bean으로 등록할 수 있다고 설명하셨는데 실제로 코드를 돌려보면 빈 순환 참조 에러가 발생합니다.
+
+이유는 `https://www.inflearn.com/questions/48156` 에서 확인!
+
+TimeTraceAop의 AOP 대상을 지정하는 @Around 코드를 보시면, SpringConfig의 timeTraceAop() 메서드도 AOP로 처리하게 됩니다. 
+
+그런데 이게 바로 자기 자신인 TimeTraceAop를 생성하는 코드인 것이지요. 
+
+그래서 순환참조 문제가 발생합니다.
+
+`soutv`를 치면 해당 변수에 대한 출력문이 나옵니다.
+
+aop를 이용해서 실제 Proxy가 주입해주는 방법이 존재합니다.
+
